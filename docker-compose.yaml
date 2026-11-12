@@ -1,0 +1,23 @@
+version: '3'
+services:
+  odooreloj:
+    image: odoo:15
+    env_file: .env
+    depends_on:
+      - postgres
+    ports:
+      - "8069:8069"
+    volumes:
+      - ./data:/var/lib/odoo
+      - ./addons:/mnt/addons
+#    command: odoo -u all -d basededatos
+  postgres:
+    image: postgres:13
+    env_file: .env
+    volumes:
+      - ./db:/var/lib/postgresql/data/pgdata
+
+volumes:
+  data:
+  addons:
+  db:
